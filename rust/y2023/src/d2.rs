@@ -20,22 +20,26 @@ fn parse_balls(l: &str) -> bool {
 }
 
 fn parse_min_balls(l: &str) -> i64 {
-    let mut c: HashMap<&str, Vec<i64>> =
-        HashMap::from([("red", vec![]), ("green", vec![]), ("blue", vec![])]);
     let b: Vec<Vec<&str>> = l
         .split(";")
         .map(|l| l.split(",").map(|i| i.trim()).collect())
         .collect();
+    let mut red = 0;
+    let mut blue = 0;
+    let mut green = 0;
     for s in b {
         for i in s {
             let (l, r) = i.split_once(" ").unwrap();
             let l: i64 = l.parse().unwrap();
-            c.get_mut(r).unwrap().push(l);
+            match r {
+                "red" => red = red.lt(&l).then(|| l).unwrap_or(red),
+                "blue" => blue = blue.lt(&l).then(|| l).unwrap_or(blue),
+                "green" => green = green.lt(&l).then(|| l).unwrap_or(green),
+                _ => (),
+            }
         }
     }
-    let p = c.get("red").unwrap().iter().max().unwrap()
-        * c.get("blue").unwrap().iter().max().unwrap()
-        * c.get("green").unwrap().iter().max().unwrap();
+    let p = red * green * blue;
     return p;
 }
 
