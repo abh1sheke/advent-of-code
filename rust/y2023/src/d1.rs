@@ -19,7 +19,7 @@ fn from_words(i: usize, b: &[u8]) -> Option<i64> {
 }
 
 pub fn p1() -> i64 {
-    let bytes = include_bytes!("../inputs/d1.txt");
+    let bytes = include_bytes!("../../../inputs/2023/d1.txt");
     let mut sum = 0;
     bytes.split(|b| *b == b'\n').for_each(|l| {
         let l = l
@@ -39,7 +39,7 @@ pub fn p1() -> i64 {
 }
 
 pub fn p2() -> i64 {
-    let bytes = include_bytes!("../inputs/d1.txt");
+    let bytes = include_bytes!("../../../inputs/2023/d1.txt");
     let mut sum = 0;
     bytes.split(|b| *b == b'\n').for_each(|l| {
         let l = l
